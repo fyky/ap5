@@ -81,7 +81,10 @@
     </header>
 
    <main>
-    <div class="search"><%= render 'searches/form' %></div>
+    <% unless %w[root home_about].any? { |name| current_page?(send("#{name}_path")) }%>
+      <div class="search"><%= render 'searches/form' %></div>
+    <% end %>
+
     <%= notice %>
 
 
