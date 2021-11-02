@@ -1,0 +1,26 @@
+<%= render 'books/error', books: @user %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+
+<h1>User Info </h1>
+
+<%= form_with model:@user, local:true do |f| %>
+
+  <p class="text">Name</p>
+  <%= f.text_field :name %>
+  <p class="text">Photo</p>
+  <%= f.attachment_field :profile_image %>
+
+  <p class="text">Introduce</p>
+  <%= f.text_area :introduction %>
+
+  <p class="text">
+  <%= f.submit 'Update User' %>
+  </p>
+
+<% end %>
+
+    </div>
+  </div>
+</div>

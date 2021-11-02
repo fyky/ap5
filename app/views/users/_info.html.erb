@@ -1,0 +1,43 @@
+    <h1>User info</h1>
+
+      <%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "/assets/noimage.jpeg" %>
+
+      <table>
+        </tr>
+        <tr>
+          <td><strong>name</strong></td>
+          <td><strong><%= user.name %></strong></td>
+        </tr>
+        <tr>
+          <td><strong>introduction</strong></td>
+          <td><strong><%= user.introduction %></strong></td>
+        </tr>
+        <tr>
+          <td><strong>follows</strong></td>
+          <td><strong><%= link_to user_followings_path(user) do %><%= user.followings.count %><% end %></strong></td>
+        </tr>
+        <tr>
+          <td><strong>followed</strong></td>
+          <td><strong><%= link_to user_followers_path(user) do %><%= user.followers.count %><% end %></strong></td>
+        </tr>
+      </table>
+      
+    <p></p>
+    <% if current_page?(user_path(user.id)) %>
+      <% if current_user.following?(user) %>
+        <%= link_to user_relationships_path(user.id), method: :delete do %>
+        <button type="button" class="btn btn-success">フォロー外す</button>
+        <% end %>
+      <% else %>
+        <%= link_to user_relationships_path(user.id), method: :post do %>
+          <button type="button" class="btn btn-info">フォローする</button>
+        <% end %>
+      <% end %>
+
+    <% else current_page?(user_path(user.id)) %>
+    <%= link_to edit_user_path(user), class: "btn btn-outline-primary  btn-block btn-outline-dark" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+
+    <% end %>
+
